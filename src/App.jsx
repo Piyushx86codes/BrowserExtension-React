@@ -5,26 +5,27 @@ import { Home } from './pages/Home/Home';
 import { useBrowser } from './Context/Browser-context';
 import { Task } from './pages/Task/Task';
 
+const index = Math.floor(Math.random() * images.length);
+const bgImage = images[index].image;
+
 function App() {
-  const index = Math.floor(Math.random() * images.length);
-  const bgImage = images[index].image;
-  
+
   const {name, browserDispatch} = useBrowser();
 
-  useEffect(()=>{
+  useEffect(() => {
     const userName = localStorage.getItem("name");
     browserDispatch({
-      type:"NAME",
-      payload: userName,
-    })
-  },[])
+      type: "NAME",
+      payload: userName
+    });
+  }, [])
+
+
   return (
-    <>
-      <div className='app' style={{backgroundImage:`url("${bgImage}")`}}>
-       {name ? <Task/> : <Home/>}
-      </div>
-    </>
-  )
+    <div className="app" style={{backgroundImage: `url("${bgImage}")`}}>
+      { name ? <Task /> : <Home />}
+    </div>
+  );
 }
 
-export default App
+export default App;
